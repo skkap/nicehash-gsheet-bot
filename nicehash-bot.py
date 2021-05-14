@@ -4,6 +4,10 @@ import datetime
 import json
 import pandas as pd
 
+import os
+arr = os.listdir()
+print(arr)
+
 gc = pygsheets.authorize(service_file='google-sa.json')
 
 with open("nicehash.json") as f:
