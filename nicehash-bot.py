@@ -8,9 +8,9 @@ import os
 arr = os.listdir()
 print(arr)
 
-gc = pygsheets.authorize(service_file='google-sa.json')
+gc = pygsheets.authorize(service_file='config/google-sa.json')
 
-with open("nicehash.json") as f:
+with open("config/nicehash.json") as f:
   nh_config = json.load(f)
 
 def get_gpu_temperature(encoded_temperature):
