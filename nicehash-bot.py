@@ -23,7 +23,7 @@ def write_to_gsheet(rig_name, device_name, row_values):
     cells = wks.get_all_values(include_tailing_empty_rows=False, include_tailing_empty=False, returnas='matrix')
     last_row = len(cells)
     if last_row == 1:
-        wks.update_row(1, values=["Time", "GPU temperature", "Power useage, Watt", "Fan speed, percentage"])
+        wks.update_row(1, values=["Time", "GPU temperature, ℃", "Power useage, Watt", "Fan speed, percentage"])
     wks.insert_rows(last_row, number=1, values=row_values)
 
 nh_private_api = nicehash.private_api(nh_config["host"], nh_config["organisationId"], nh_config["key"], nh_config["secret"])
