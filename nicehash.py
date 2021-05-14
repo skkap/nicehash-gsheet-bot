@@ -1,3 +1,5 @@
+## From https://github.com/nicehash/rest-clients-demo/tree/master/python with minor modifications
+
 from datetime import datetime
 from time import mktime
 import uuid
