@@ -9,7 +9,7 @@ COPY Pipfile.lock .
 
 RUN pipenv install --deploy --ignore-pipfile
 
-COPY nicehash.py .
-COPY nicehash-bot.py .
+COPY nicehash-account-stats-bot.py .
+COPY nicehash-mining-stats-bot.py .
 
 # CMD ["pipenv", "run", "python", "/app/nicehash-mining-stats-bot.py"]
