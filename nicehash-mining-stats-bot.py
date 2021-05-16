@@ -12,9 +12,9 @@ def get_gpu_temperature(encoded_temperature):
     # See https://github.com/nicehash/NiceHashQuickMiner/issues/146
     return encoded_temperature % 65536
 
-def write_to_gsheet(rig_name, device_name, row_values):
+def write_to_gsheet(rig_name, device_id, device_name, row_values):
     sheet = gc.open(nh_config["googleSheetName"])
-    worksheet_name = rig_name + " - " + device_name
+    worksheet_name = rig_name + " - " + device_name + "[" + device_id + "]"
     try:
         wks = sheet.worksheet_by_title(worksheet_name)
     except pygsheets.exceptions.WorksheetNotFound:
@@ -37,6 +37,7 @@ for rig in rigs:
     rig_name = rig_info["name"]
     for device in rig_info["devices"]:
         device_name = device["name"]
+        device_id = device["id"]
         if device_name in rig["devices"]:
             print("Gathering information about device " + device_name)
             gpu_temperature = get_gpu_temperature(device["temperature"])
@@ -44,6 +45,6 @@ for rig in rigs:
             fan_percentage = device["revolutionsPerMinutePercentage"]
             row_values = [now_str, gpu_temperature, powerUsage, fan_percentage]
             print("Writing to the Google Sheets: " + str(row_values))
-            write_to_gsheet(rig_name, device_name, row_values)
+            write_to_gsheet(rig_name, device_id, device_name, row_values)
 
 print("Finished")
