@@ -2,11 +2,6 @@ import nicehash
 import pygsheets
 import datetime
 import json
-import pandas as pd
-
-import os
-arr = os.listdir()
-print(arr)
 
 gc = pygsheets.authorize(service_file='config/google-sa.json')
 

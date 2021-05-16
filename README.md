@@ -14,7 +14,11 @@ Collects information about mining rigs from Nicehash API and writes to Google Sh
 
 5. Download service account JSON credentials and put then in the `google-sa.json`. Refer to `google-sa.example.json`.
 
-6. Install dependencies and run `nicehash-bot.py`.
+6. Install dependencies.
 
+7. Run `nicehash-mining-stats-bot.py` and/or `nicehash-mining-stats-bot.py`.
+
+- `pipenv run python /app/nicehash-account-stats-bot.py`
+- `pipenv run python /app/nicehash-mining-stats-bot.py`
 
 You can setup cron job to make such records periodically.
