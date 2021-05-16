@@ -12,4 +12,4 @@ RUN pipenv install --deploy --ignore-pipfile
 COPY nicehash.py .
 COPY nicehash-bot.py .
 
-CMD ["pipenv", "run", "python", "/app/nicehash-mining-stats-bot.py"]
+# CMD ["pipenv", "run", "python", "/app/nicehash-mining-stats-bot.py"]
