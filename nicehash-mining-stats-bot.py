@@ -45,3 +45,5 @@ for rig in rigs:
             row_values = [now_str, gpu_temperature, powerUsage, fan_percentage]
             print("Writing to the Google Sheets: " + str(row_values))
             write_to_gsheet(rig_name, device_name, row_values)
+
+print("Finished")

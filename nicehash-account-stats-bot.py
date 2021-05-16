@@ -29,3 +29,5 @@ account = nh_private_api.get_accounts_for_currency("BTC")
 btc_available = account["available"]
 print("Writing to the Google Sheets: " + str(btc_available))
 write_to_gsheet([now_date_str, btc_available])
+
+print("Finished")
