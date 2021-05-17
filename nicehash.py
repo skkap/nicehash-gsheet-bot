@@ -298,6 +298,8 @@ class private_api:
     def get_rig(self, rig):
         return self.request('GET', "/main/api/v2/mining/rig2/{}".format(rig), '', None)
 
+    def get_rigs(self):
+        return self.request('GET', "/main/api/v2/mining/rigs2", '', None)
 
 if __name__ == "__main__":
     parser = optparse.OptionParser()

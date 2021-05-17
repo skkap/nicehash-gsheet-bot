@@ -3,11 +3,5 @@
     "organisationId": "",
     "key": "",
     "secret": "",
-    "rigs": [
-        {
-            "rigId": "",
-            "devices": ["GeForce RTX 3060"]
-        }
-    ],
     "googleSheetName": "Mining log"
 }

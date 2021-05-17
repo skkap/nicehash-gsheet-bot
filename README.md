@@ -6,7 +6,7 @@ Collects information about mining rigs from Nicehash API and writes to Google Sh
 
 1. Create readonly Nicehash API key. Details are here: https://www.nicehash.com/docs/
 
-2. Create `nicehash.json` file and fill in the API key and mining rigs information. Refer to `nicehash.example.json`. Multiple rigs and devices supported.
+2. Create `nicehash.json` file and fill in the API key and secret. Refer to `nicehash.example.json`. Multiple rigs and devices supported.
 
 3. Create Google API Service Account for Google Sheets. Refer to https://pygsheets.readthedocs.io/en/stable/authorization.html.
 
