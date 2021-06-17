@@ -3,5 +3,6 @@
     "organisationId": "",
     "key": "",
     "secret": "",
-    "googleSheetName": "Mining log"
+    "googleSheetName": "Mining log",
+    "newrelicInsertApiKey": ""
 }
