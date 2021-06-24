@@ -54,7 +54,7 @@ for rig in rigs:
         device1_speed = 0
         device_speeds = device["speeds"]
         if (len(device_speeds)) > 0:
-            device1_speed = float(device_speeds[1]["speed"])
+            device1_speed = float(device_speeds[0]["speed"])
 
         push_metric("nicehash.gpu_temperature", gpu_temperature, {"rigId": rig_id, "deviceId": device_id}, nh_config["newrelicInsertApiKey"])
         push_metric("nicehash.power_usage", power_usage, {"rigId": rig_id, "deviceId": device_id}, nh_config["newrelicInsertApiKey"])
