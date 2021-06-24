@@ -20,6 +20,9 @@ print(now_str + ": Starting nicehash metrics collection...")
 devices_mining = 0
 rigs_mining = 0
 rigs_info = nh_private_api.get_rigs()
+
+print(json.dumps(rigs_info))
+
 rigs = rigs_info["miningRigs"]
 for rig in rigs:
     rig_id = rig["rigId"]
@@ -47,10 +50,16 @@ for rig in rigs:
         power_usage = device["powerUsage"]
         fan_percentage = device["revolutionsPerMinutePercentage"]
         print("Recording metrics ...")
+        
+        device1_speed = 0
+        device_speeds = device["speeds"]
+        if (len(device_speeds)) > 0:
+            device1_speed = float(device_speeds[1]["speed"])
 
         push_metric("nicehash.gpu_temperature", gpu_temperature, {"rigId": rig_id, "deviceId": device_id}, nh_config["newrelicInsertApiKey"])
         push_metric("nicehash.power_usage", power_usage, {"rigId": rig_id, "deviceId": device_id}, nh_config["newrelicInsertApiKey"])
         push_metric("nicehash.fan_percentage", fan_percentage, {"rigId": rig_id, "deviceId": device_id}, nh_config["newrelicInsertApiKey"])
+        push_metric("nicehash.speed", device1_speed, {"rigId": rig_id, "deviceId": device_id}, nh_config["newrelicInsertApiKey"])
 
 push_metric("nicehash.device.mining", devices_mining, {}, nh_config["newrelicInsertApiKey"])
 push_metric("nicehash.rig.mining", rigs_mining, {} , nh_config["newrelicInsertApiKey"])
