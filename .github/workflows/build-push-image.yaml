@@ -1,18 +1,38 @@
 name: build-push-image
 
 on:
-  push:
-    branches: master
-    paths-ignore:
-      - '**.md'
-      - '.github/**'
-      - '!.github/workflows/build-push-image.yaml'
+  release:
+    types: [released]
 
 jobs:
+  prepare-build:
+    if: github.event.release.target_commitish == 'master'
+    runs-on: ubuntu-latest
+    outputs:
+      IMAGE_TAG: ${{ steps.set_output.outputs.IMAGE_TAG }}
+    steps:
+      - name: Set IMAGE_TAG
+        id: set_output
+        run: |
+          echo ::set-output name=IMAGE_TAG::$(echo ${GITHUB_REF:10})
   build-image:
     name: Build docker image
+    needs: [prepare-build]
     runs-on: ubuntu-latest
+    env:
+      IMAGE_TAG: ${{ needs.prepare-build.outputs.IMAGE_TAG }}
     steps:
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: |
+            ghcr.io/${{ github.repository_owner }}/nicehash-gsheet-bot
+          tags: |
+            type=raw,value=${{ env.IMAGE_TAG }},priority=1000
+            type=ref,event=branch
+            type=sha
+            type=raw,value=latest
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
       - name: Set up Docker Buildx
@@ -27,7 +47,9 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
+          file: Dockerfile
           push: true
-          tags: ghcr.io/skkap/nicehash-gsheet-bot:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
